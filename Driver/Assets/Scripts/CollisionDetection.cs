@@ -14,19 +14,29 @@ public class CollisionDetection : MonoBehaviour
     SpriteRenderer spriteRenderer;
     int score = 0;
     
+    public AudioSource audioSource;
+    public AudioClip[] Sesler;
+    
+    
+    
+    
+    
     
     private void Start()
     {
-       spriteRenderer = GetComponent<SpriteRenderer>();
-     
-       
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
+        
+        
+        
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
         if(col.tag == "gold")
         {
-
+            audioSource.clip = Sesler[0];
+            audioSource.Play();
             score++;
             if (score % 2 == 0)
             {
@@ -50,6 +60,20 @@ public class CollisionDetection : MonoBehaviour
             Destroy(col.gameObject);
             
             
+        }
+
+        else if (col.gameObject.CompareTag("finish"))
+        {
+           audioSource.clip = Sesler[1];    
+           audioSource.Play();
+              
+           
+       
+           
+            
+           
+           Debug.Log("You Win");
+           
         }
        
     }
