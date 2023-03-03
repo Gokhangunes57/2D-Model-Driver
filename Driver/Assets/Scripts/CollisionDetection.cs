@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -16,6 +17,8 @@ public class CollisionDetection : MonoBehaviour
     
     public AudioSource audioSource;
     public AudioClip[] Sesler;
+    public TextMeshProUGUI scoreText;
+    
     
     
     
@@ -30,6 +33,11 @@ public class CollisionDetection : MonoBehaviour
         
         
     }
+    public void Addcoin()
+    {
+        score++;
+        scoreText.text = "Score: "+score.ToString();
+    }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -37,7 +45,7 @@ public class CollisionDetection : MonoBehaviour
         {
             audioSource.clip = Sesler[0];
             audioSource.Play();
-            score++;
+            Addcoin();
             if (score % 2 == 0)
             {
                 spriteRenderer.color = colorOrange;
