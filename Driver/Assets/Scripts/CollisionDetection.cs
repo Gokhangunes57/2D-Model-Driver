@@ -18,6 +18,8 @@ public class CollisionDetection : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip[] Sesler;
     public TextMeshProUGUI scoreText;
+    public GameObject finishPanel;
+    
     
     
     
@@ -37,6 +39,15 @@ public class CollisionDetection : MonoBehaviour
     {
         score++;
         scoreText.text = "Score: "+score.ToString();
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("finish"))
+        {
+            finishPanel.SetActive(true);
+        }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D col)
